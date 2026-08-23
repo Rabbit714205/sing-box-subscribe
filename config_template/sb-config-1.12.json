@@ -41,10 +41,12 @@
     "rules": [
       {
         "clash_mode": "direct",
+        "action": "route",
         "server": "local"
       },
       {
         "clash_mode": "global",
+        "action": "route",
         "server": "google"
       },
       {
@@ -53,10 +55,12 @@
           "AAAA"
         ],
         "rule_set": "geosite-cn",
+        "action": "route",
         "server": "fakeip"
       },
       {
         "rule_set": "geosite-cn",
+        "action": "route",
         "server": "local"
       },
       {
@@ -72,6 +76,7 @@
           }
         ],
         "server": "google",
+        "action": "route",
         "client_subnet": "114.114.114.114/24"
       },
       {
@@ -79,6 +84,7 @@
           "A",
           "AAAA"
         ],
+        "action": "route",
         "server": "fakeip"
       }
     ],

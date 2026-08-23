@@ -70,7 +70,7 @@
       {"rule_set": ["ChinaDomain"],"query_type": ["A","AAAA"],"match_response": "tx-response","ip_accept_any": true,"action": "respond","race": true},
       {"rule_set": ["ChinaDomain"],"action": "route","server": "ali-udp","timeout": "3s"},
       {"query_type": "HTTPS","action": "reject"},
-      {"domain_suffix": ["lancache.steamcontent.com","10099.com.cn","msftconnecttest.com","msftncsi.com","local","lan","home","internal","corp","example.com"],"server": "local"},
+      {"domain_suffix": ["lancache.steamcontent.com","10099.com.cn","msftconnecttest.com","msftncsi.com","local","lan","home","internal","corp","example.com"],"action": "route","server": "local"},
       {"query_type": ["A","AAAA"],"action": "route","server": "remote","rewrite_ttl": 1}
     ],
     "optimistic": true,

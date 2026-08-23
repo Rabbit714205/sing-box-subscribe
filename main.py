@@ -365,7 +365,7 @@ def set_proxy_rule_dns(config):
     dns_rules = config['dns']['rules']
     asod = providers["auto_set_outbounds_dns"]
     for rule in config_rules:
-        if rule['outbound'] not in ['block', 'dns-out']:
+        if 'outbound' in rule and rule['outbound'] not in ['block', 'dns-out']:
             if rule['outbound'] != 'direct':
                 outbounds_dns_template = \
                     list(filter(lambda server: server['tag'] == asod["proxy"], config['dns']['servers']))[0]
@@ -374,6 +374,8 @@ def set_proxy_rule_dns(config):
                 dns_obj['detour'] = rule['outbound']
                 if dns_obj not in outbound_dns:
                     outbound_dns.append(dns_obj)
+            if config['dns'].get('servers') and any(server.get('type') == 'fakeip' for server in config['dns']['servers']):
+                continue
             if rule.get('type') and rule['type'] == 'logical':
                 dns_rule_obj = {
                     'type': 'logical',
@@ -405,6 +407,8 @@ def pro_dns_from_route_rules(route_rule):
                            'domain_regex', 'geosite', "source_geoip", "source_ip_cidr", "source_port",
                            "source_port_range", "port", "port_range", "process_name", "process_path", "package_name",
                            "user", "user_id", "clash_mode", "invert"]
+    if route_rule.get('action') not in (None, 'route'):
+        return None
     dns_rule_obj = {}
     for key in route_rule:
         if key in dns_route_same_list:
