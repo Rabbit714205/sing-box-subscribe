@@ -17,6 +17,13 @@
     "store_fakeip": false
     }
   },
+  "http_clients": [
+    {
+      "tag": "default",
+      "version": 2,
+      "detour": "direct"
+    }
+  ],
   "dns": {
     "servers": [
       {
@@ -97,6 +104,7 @@
     }
   ],
   "route": {
+    "default_http_client": "default",
     "auto_detect_interface": true,
     "default_domain_resolver": {
       "server": "localDns"
@@ -128,14 +136,17 @@
       {
         "rule_set": "geosite-category-ads-all",
         "clash_mode": "global",
+        "action": "route",
         "outbound": "proxy"
       },
       {
         "clash_mode": "direct",
+        "action": "route",
         "outbound": "direct"
       },
       {
         "clash_mode": "global",
+        "action": "route",
         "outbound": "proxy"
       },
       {
@@ -145,6 +156,7 @@
           "yacd.haishan.me",
           "d.metacubex.one"
         ],
+        "action": "route",
         "outbound": "direct"
       }
     ],
@@ -154,7 +166,7 @@
         "type": "remote",
         "format": "binary",
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/category-ads-all.srs",
-        "download_detour": "direct"
+        "http_client": "default"
       }
     ]
   }

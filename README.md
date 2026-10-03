@@ -114,7 +114,23 @@ docker run -p 5000:5000 sing-box:latest
   "type": "remote",
   "format": "source",
   "url": "https://raw.githubusercontent.com/Toperlock/sing-box-geosite/main/wechat.json",
-  "download_detour": "auto"
+  "http_client": "default"
 }
 ```
+
+> sing-box 1.14.0 起 `download_detour` 已弃用（1.16.0 移除），改用 `http_client`，
+> 并需要在顶层定义 `http_clients`（示例中的 `default` 指向 `direct` 出站），
+> 可同时用 `route.default_http_client` 指定默认 HTTP 客户端：
+> ```json
+> "http_clients": [
+>   {
+>     "tag": "default",
+>     "version": 2,
+>     "detour": "direct"
+>   }
+> ],
+> "route": {
+>   "default_http_client": "default"
+> }
+> ```
 
